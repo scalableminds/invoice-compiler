@@ -1,0 +1,53 @@
+invoice:
+  number: 42
+  date: 2014-07-06
+
+sender:
+  name_short: Fresh Company
+  name: Fresh Company ltd.
+  street: Veggieroad 32
+  zip: 98765
+  town: Pearadise
+  contact:
+    name: Bob Orange
+    email: bob@example.org
+    phone: +49 123 4567 890
+  banking:
+    name: Cool Bank
+    iban: DE12 3456 0000 7890 1234 56
+    bic: COOLBANX
+  tax:
+    number: 012/345/6789
+    vat_id: DE1234567
+  footer: |
+    Executive Partners: Bob Orange · Mike Pineapple
+
+receiver:
+  company: Awesome Client
+  title: Fruit Dept
+  name: Mrs. Katy Banana
+  street: Fruitlane 12
+  zip: 12345
+  town: Strawberry Fields
+  country: Germany
+
+intro_text: |
+  Hi guys,
+  we hope you enjoyed your fruit salad.
+
+outro_text: |
+  Please pay during the next 14 days.
+
+items:
+  -
+    quantity: 30 + 28 + 912
+    title: |
+      Bananas
+    tax_rate: 19
+    price: 0.6
+
+  -
+    title: |
+      Watermelon
+    tax_rate: 7
+    price: 4

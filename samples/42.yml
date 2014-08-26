@@ -1,6 +1,9 @@
 invoice:
   number: 42
   date: 2014-07-06
+  location: Pearadise
+  language: en
+  currency: €
 
 sender:
   name_short: Fresh Company
@@ -12,15 +15,6 @@ sender:
     name: Bob Orange
     email: bob@example.org
     phone: +49 123 4567 890
-  banking:
-    name: Cool Bank
-    iban: DE12 3456 0000 7890 1234 56
-    bic: COOLBANX
-  tax:
-    number: 012/345/6789
-    vat_id: DE1234567
-  footer: |
-    Executive Partners: Bob Orange · Mike Pineapple
 
 receiver:
   company: Awesome Client

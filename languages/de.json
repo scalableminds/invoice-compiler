@@ -1,0 +1,12 @@
+{
+  "Invoice": "Rechnung",
+  "Item": "Pos.",
+  "Qty.": "Menge",
+  "Description": "Bezeichnung",
+  "Unit Price": "Einzelpreis",
+  "VAT": "MwSt.",
+  "Net": "Netto",
+  "Contact": "Ansprechpartner",
+  "Subtotal": "Netto",
+  "Total": "Rechnungsbetrag"
+}

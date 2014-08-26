@@ -7,9 +7,20 @@ exec = require("child_process").exec
 yaml = require("js-yaml")
 moment = require("moment")
 mkdirp = require("mkdirp")
+wkhtmltopdf = require("wkhtmltopdf")
+numeral = require("numeral")
+handlebars = require("handlebars")
 
-moment.lang("de")
-DATE_FORMAT = 'DD. MMMM YYYY'
+translation = {}
+
+# Helper functions
+setLanguage = (lang) ->
+  moment.locale(lang)
+  try
+    numeral.language(lang, require("numeral/languages/#{lang}"))
+  catch e
+  numeral.language(lang)
+  translation = require("./languages/#{lang}.json")
 
 replaceExtname = (filename, newExtname) ->
   return filename.replace(new RegExp(path.extname(filename).replace(/\./g, "\\."), "g"), newExtname)
@@ -17,18 +28,7 @@ replaceExtname = (filename, newExtname) ->
 roundCurrency = (value) ->
   if isNaN(value)
     value = 0
-  return Math.round(value * 100) / 100
-
-
-formatCurrency = (value) ->
-  parts = roundCurrency(value).toString().split(".")
-  if parts.length == 1
-    parts.push("00")
-
-  while parts[1].length < 2
-    parts[1] += "0";
-
-  return parts.join(",") + " €"
+  return parseFloat(value.toFixed(2))
 
 sum = (items) ->
   items.reduce(((r, a) -> r + a), 0)
@@ -40,6 +40,10 @@ calculateTotal = (items) ->
   return sum(_.pluck(items, "total_value"))
 
 
+# Default language setting
+setLanguage("de")
+
+# Business logic transformation
 transformData = (data) ->
 
   _.defaults(data,
@@ -50,8 +54,13 @@ transformData = (data) ->
     outro_text: ""
   )
 
-  data.invoice.date = moment(data.invoice.date).format(DATE_FORMAT)
+  data.invoice.language ?= "de"
+  setLanguage(data.invoice.language)
+
+  data.invoice.date ?= new Date()
   data.invoice.template ?= "default"
+  data.invoice.location ?= data.sender.town
+  data.invoice.currency ?= "€"
 
   data.items = data.items.map((item) ->
 
@@ -67,7 +76,9 @@ transformData = (data) ->
       throw new Error("An invoice item needs a price.")
 
     if _.isString(item.quantity)
-      item.quantity = (new Function("return #{item.quantity};"))()
+      item.quantity = (new Function("return #{item.quantity.replace(/\#/g, "//")};"))()
+
+    item.quantity = Math.ceil(item.quantity)
 
     item.net_value = item.quantity * item.price
     item.tax_value = item.net_value * (item.tax_rate / 100)
@@ -92,8 +103,9 @@ transformData = (data) ->
 
   data
 
+
+# Process arguments
 inFilename = process.argv[2]
-tmpFilename = path.join(__dirname, "tmp", "invoice-#{Math.round(Math.random() * 1e5)}.tex")
 outFilename = replaceExtname(inFilename, ".pdf")
 
 # console.log(tmpFilename)
@@ -101,38 +113,50 @@ outFilename = replaceExtname(inFilename, ".pdf")
 data = yaml.safeLoad(fs.readFileSync(inFilename, "utf8"))
 data = transformData(data)
 
-template = _.template(fs.readFileSync("#{__dirname}/templates/#{data.invoice.template}.tex.template", "utf8"))
+tmpFilename = "#{__dirname}/templates/#{data.invoice.template}/#{"xxxx-xxxx-xxxx".replace(/x/g, -> ((Math.random() * 16) | 0).toString(16))}.html"
 
-mkdirp.sync(path.dirname(tmpFilename))
-fs.writeFileSync(tmpFilename, template(data), "utf8")
 
-exec(
-  "xelatex #{path.basename(tmpFilename)}"
-  cwd : path.join(__dirname, "tmp")
-  env : _.extend(
-    {}
-    process.env
-    TEXINPUTS : ".:#{path.join(__dirname, "resources")}:"
-  )
-  (err) ->
-
-    if fs.existsSync(replaceExtname(tmpFilename, ".aux"))
-      fs.unlinkSync(replaceExtname(tmpFilename, ".aux"))
-
-    if fs.existsSync(replaceExtname(tmpFilename, ".log"))
-      fs.unlinkSync(replaceExtname(tmpFilename, ".log"))
-
-    if fs.existsSync(replaceExtname(tmpFilename, ".out"))
-      fs.unlinkSync(replaceExtname(tmpFilename, ".out"))
-
-    if err
-      throw err
-    else
-      fs.renameSync(replaceExtname(tmpFilename, ".pdf"), outFilename)
-
-      if fs.existsSync(replaceExtname(tmpFilename, ".tex"))
-        fs.unlinkSync(replaceExtname(tmpFilename, ".tex"))
-
-      console.log("Saved to #{path.relative(process.cwd(), outFilename)}")
+# Prepare rendering
+handlebars.registerHelper("plusOne", (value) -> 
+  return value + 1
+)
+handlebars.registerHelper("number", (value) ->
+  return numeral(value).format("0[.]0")
+)
+handlebars.registerHelper("money", (value) ->
+  return "#{numeral(value).format("0,0.00")} #{data.invoice.currency}"
+)
+handlebars.registerHelper("percent", (value) ->
+  return numeral(value / 100).format("0 %")
+)
+handlebars.registerHelper("date", (value) ->
+  return moment(value).format("LL")
+)
+handlebars.registerHelper("lines", (options) ->
+  contents = options.fn()
+  contents = contents.split(/<br\s*\/?>/)
+  contents = _.compact(contents.map((a) -> a.trim()))
+  contents = contents.join("<br>")
+  return contents
+)
+handlebars.registerHelper("pre", (contents) ->
+  return new handlebars.SafeString(contents.split(/\n/).map((a) -> handlebars.Utils.escapeExpression(a)).join("<br>"))
+)
+handlebars.registerHelper("t", (phrase) ->
+  return translation[phrase] ? phrase
 )
 
+# Rendering
+template = handlebars.compile(fs.readFileSync("#{__dirname}/templates/#{data.invoice.template}/main.html", "utf8"))
+fs.writeFileSync(tmpFilename, template(data), "utf8")
+
+wkhtmltopdf("file://#{tmpFilename}", { 
+  output: outFilename,
+  headerHtml: "#{__dirname}/templates/#{data.invoice.template}/header.html",
+  footerHtml: "#{__dirname}/templates/#{data.invoice.template}/footer.html",
+  marginLeft: "0mm",
+  marginRight: "0mm",
+}, ->
+  console.log("Created #{outFilename}")
+  fs.unlinkSync(tmpFilename)
+)

@@ -1,6 +1,6 @@
 # invoice-compiler
 
-Generate invoices from YAML files using XeLaTeX.
+Generate invoices from YAML files using [wkhtmltopdf](http://wkhtmltopdf.org/).
 
 ## Usage
 ```bash
@@ -13,11 +13,7 @@ See `samples` directory.
 
 ## Dependencies
 * node & npm
-* xelatex
 * Open Sans font
-
-## Todo
-* Non-german templates
 
 
 ## Contributors

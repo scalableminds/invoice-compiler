@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="clearfix">
+      <div id="address-window">
+        <div class="corners"><div></div><div></div><div></div><div></div></div>
+        <p class="sender"><strong>{{ sender.name_short }}</strong> &bull; {{ sender.street }} &bull; {{ sender.zip }} {{ sender.town }}</p>
+        <p class="receiver">
+        {{# lines }}
+          <strong>{{ ../receiver.company }}</strong><br/>
+          {{ ../receiver.title }}<br>
+          {{ ../receiver.name }}<br>
+          {{ ../receiver.street }}<br>
+          {{ ../receiver.zip }} {{ ../receiver.town }}<br>
+          {{ ../receiver.country }}
+        {{/ lines }}
+        </p>
+      </div>
+      <div id="info-box">
+        <p class="head">{{ sender.name_short }}</p>
+        <p>
+        {{# lines }}
+          {{ ../sender.street }}<br>
+          {{ ../sender.zip }} {{ ../sender.town }}<br>
+          {{ ../sender.country }}
+        {{/ lines }}
+        </p>
+        <p class="head">{{ t "Contact" }}</p>
+        <p>
+          {{ sender.contact.name }}<br>
+          {{ sender.contact.email }}<br>
+          {{ sender.contact.phone }}
+        </p>
+        <p class="head">{{ invoice.location }}, {{ date invoice.date }}</p>
+      </div>
+    </div>
+    <article>
+      <h1>{{ t "Invoice" }} {{ invoice.number }}</h1>
+      <p>{{ pre intro_text }}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>{{ t "Item" }}</th>
+            <th>{{ t "Qty." }}</th>
+            <th>{{ t "Description" }}</th>
+            <th>{{ t "Unit Price" }}</th>
+            <th>{{ t "VAT" }}</th>
+            <th>{{ t "Net"}}</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{# each items }}
+          <tr>
+            <td>{{ plusOne @index }}</td>
+            <td>{{ number this.quantity }}</td>
+            <td>{{ pre this.title }}</td>
+            <td>{{ money this.price }}</td>
+            <td>{{ percent this.tax_rate }}</td>
+            <td>{{ money this.net_value }}</td>
+          </tr>
+        {{/ each }}
+
+          <tr class="foot">
+            <td colspan="5">{{ t "Subtotal" }}</td>
+            <td>{{ money totals.net  }}</td>
+          </tr>
+        {{# each totals.tax }}
+          <tr class="foot">
+            <td colspan="5">{{ t "VAT" }} {{ percent this.rate }}</td>
+            <td>{{ money this.total }}</td>
+          </tr>
+        {{/ each }}
+          <tr class="foot">
+            <td colspan="5"><strong>{{ t "Total" }}</strong></td>
+            <td><strong>{{ money totals.total }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>{{ pre outro_text }}</p>
+    </article>
+  </body>
+</html>

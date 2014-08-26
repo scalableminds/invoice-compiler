@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+}
+html, body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font: 9.5pt "Open Sans";
+  line-height: 1.5;
+}
+body {
+  padding: 5mm 25mm;
+}
+.clearfix {
+  clear: both;
+}
+.clearfix:after,
+.clearfix:before {
+  display: block;
+  line-height: 0;
+  content: "";
+  clear: both;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 12pt;
+}
+strong, h1, h2, h3, h4, th {
+  font-family: "Open Sans Semibold";
+  font-weight: 600;
+}
+
+
+
+#address-window {
+  position: relative;
+  height: 45mm;
+  width: 85mm;
+  float: left;
+}
+#address-window .corners div {
+  position: absolute;
+  width: 3mm;
+  height: 3mm;
+  border: 1pt solid #aaa;
+}
+#address-window .corners div:nth-child(1) {
+  top: -3mm;
+  left: -3mm;
+  border-right: none;
+  border-bottom: none;
+}
+#address-window .corners div:nth-child(2) {
+  top: -3mm;
+  right: -3mm;
+  border-left: none;
+  border-bottom: none;
+}
+#address-window .corners div:nth-child(3) {
+  bottom: -3mm;
+  right: -3mm;
+  border-top: none;
+  border-left: none;
+}
+#address-window .corners div:nth-child(4) {
+  bottom: -3mm;
+  left: -3mm;
+  border-right: none;
+  border-top: none;
+}
+#address-window p {
+  margin-top: 0;
+}
+#address-window .sender {
+  font-size: 8pt;
+  color: #666;
+}
+#address-window .receiver {
+  margin-top: 10mm;
+}
+
+
+
+#info-box {
+  float: right;
+  width: 45mm;
+  margin-top: -12pt;
+  color: #666;
+  text-align: right;
+}
+#info-box p {
+  font-size: 8pt;
+  line-height: 10pt;
+  margin-top: 0;
+}
+#info-box .head {
+  margin-top: 12pt;
+  margin-bottom: 4pt;
+  font-family: "Open Sans Semibold";
+  font-weight: 600;
+}
+
+
+
+article {
+  padding-top: 7mm;
+}
+article h1 {
+  font-size: 11pt;
+  margin-bottom: 5mm;
+}
+
+
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 12pt;
+  border-bottom: 2pt solid #bbb;
+}
+thead th {
+  border-bottom: 2pt solid #bbb;
+  text-align: left;
+}
+tbody td {
+  border-bottom: 1pt solid #bbb;
+}
+td, th {
+  padding: 1mm 0;
+  vertical-align: top;
+}
+
+tbody .foot td {
+  border-bottom: none;
+}
+
+td:nth-child(1), 
+th:nth-child(1) {
+  min-width: 10mm;
+}
+td:nth-child(2),
+th:nth-child(2) {
+  min-width: 15mm;
+}
+td:nth-child(4),
+th:nth-child(4),
+td:nth-child(5),
+th:nth-child(5),
+td:nth-child(6),
+th:nth-child(6) {
+  min-width: 20mm;
+  text-align: right;
+}
+tbody .foot td:nth-child(2) {
+  text-align: right;
+}
+
+
+
+/* Header */
+header {
+  padding: 6mm 25mm 10mm;
+  text-align: right;
+}
+header img {
+  height: 25mm;
+}
+
+
+
+/* Footer */
+footer {
+  padding: 10mm 25mm;
+}
+footer p {
+  font-size: 7pt;
+  margin-bottom: 6pt;
+}

@@ -31,7 +31,7 @@ receiver:
   street: Fruitlane 12
   zip: 12345
   town: Strawberry Fields
-  country: Germany
+  country: The Berrylands
 
 # Anything nice above the items table
 intro_text: |
@@ -53,6 +53,7 @@ items:
     # Supports multiline titles
     title: |
       Bananas
+      (EU-conform)
     tax_rate: 19
     price: 0.6
 

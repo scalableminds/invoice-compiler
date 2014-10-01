@@ -1,6 +1,7 @@
 # Basic invoice information
 invoice:
   number: 42
+  template: "default"
   # Date is coded here, so you can rerender the invoice 
   # at a later point in time
   date: 2014-07-06

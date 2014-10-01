@@ -12,7 +12,7 @@ invoice invoice.yml
 # Outputs invoice.pdf
 ```
 
-See `samples` directory for an annotated sample.
+See `samples` directory for [an annotated sample](https://github.com/scalableminds/invoice-compiler/blob/master/samples/42.yml).
 
 
 ## Dependencies

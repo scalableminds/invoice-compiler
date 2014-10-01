@@ -1,15 +1,14 @@
 #!/usr/bin/env coffee
 
-_    = require("lodash")
-fs   = require("fs")
-path = require("path")
-exec = require("child_process").exec
-yaml = require("js-yaml")
-moment = require("moment")
-mkdirp = require("mkdirp")
+_           = require("lodash")
+fs          = require("fs")
+path        = require("path")
+exec        = require("child_process").exec
+yaml        = require("js-yaml")
+moment      = require("moment")
+numeral     = require("numeral")
 wkhtmltopdf = require("wkhtmltopdf")
-numeral = require("numeral")
-handlebars = require("handlebars")
+handlebars  = require("handlebars")
 
 translation = {}
 

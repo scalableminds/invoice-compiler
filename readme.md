@@ -8,12 +8,13 @@ Generate invoices from YAML files using [wkhtmltopdf](http://wkhtmltopdf.org/).
 # Outputs invoice.pdf
 ```
 
-See `samples` directory.
+See `samples` directory for an annotated sample.
 
 
 ## Dependencies
 * node & npm
-* Open Sans font
+* [wkhtmltopdf](https://github.com/devongovett/node-wkhtmltopdf#installation)
+* [Open Sans](http://www.fontsquirrel.com/fonts/open-sans) font
 
 
 ## Contributors

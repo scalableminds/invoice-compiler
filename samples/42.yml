@@ -1,10 +1,16 @@
+# Basic invoice information
 invoice:
   number: 42
+  template: "default"
+  # Date is coded here, so you can rerender the invoice 
+  # at a later point in time
   date: 2014-07-06
   location: Pearadise
+  # We use moment.js and numeral.js for localisation
   language: en
   currency: €
 
+# Your details
 sender:
   name_short: Fresh Company
   name: Fresh Company ltd.
@@ -16,6 +22,8 @@ sender:
     email: bob@example.org
     phone: +49 123 4567 890
 
+
+# The other guy's details
 receiver:
   company: Awesome Client
   title: Fruit Dept
@@ -25,23 +33,30 @@ receiver:
   town: Strawberry Fields
   country: Germany
 
+# Anything nice above the items table
 intro_text: |
   Hi guys,
   we hope you enjoyed your fruit salad.
 
+# Some text below the table
 outro_text: |
   Please pay during the next 14 days.
 
+
 items:
   -
-    quantity: 30 + 28 + 912
+    # Supports calulations (and comments)
+    quantity: |
+      30 + # Small
+      28 + # Medium
+      1 # Mega-large
+    # Supports multiline titles
     title: |
       Bananas
     tax_rate: 19
     price: 0.6
 
   -
-    title: |
-      Watermelon
+    title: Watermelon
     tax_rate: 7
     price: 4

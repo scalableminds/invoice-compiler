@@ -1,6 +1,6 @@
 {
   "name": "invoice-compiler",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Generate invoices from YAML files using wkhtmltopdf.",
   "main": "index.coffee",
   "author": "Norman Rzepka <norman.rzepka@scm.io>",
@@ -9,14 +9,22 @@
     "type": "git",
     "url": "git://github.com/scalableminds/invoice-compiler.git"
   },
+  "homepage": "http://scm.io/",
+  "bugs": "https://github.com/scalableminds/invoice-compiler/issues",
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "dependencies": {
-    "coffee-script": "git://github.com/scalableminds/coffee-script",
-    "handlebars": "^2.0.0-alpha.4",
+    "coffee-script": "^1.8.0",
+    "handlebars": "^2.0.0",
     "js-yaml": "^3.0.2",
     "lodash": "^2.4.1",
     "mkdirp": "^0.5.0",
     "moment": "^2.7.0",
     "numeral": "^1.5.3",
     "wkhtmltopdf": "^0.1.5"
+  },
+  "bin": {
+    "invoice": "./bin/invoice"
   }
 }

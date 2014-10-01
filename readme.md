@@ -1,24 +1,28 @@
 # invoice-compiler
-
 Generate invoices from YAML files using [wkhtmltopdf](http://wkhtmltopdf.org/).
+
+## Install
+```bash
+npm install -g invoice-compiler
+```
 
 ## Usage
 ```bash
-./index.coffee invoice.yml
+invoice invoice.yml
 # Outputs invoice.pdf
 ```
 
-See `samples` directory.
+See `samples` directory for [an annotated sample](https://github.com/scalableminds/invoice-compiler/blob/master/samples/42.yml).
 
 
 ## Dependencies
 * node & npm
-* Open Sans font
+* [wkhtmltopdf](https://github.com/devongovett/node-wkhtmltopdf#installation)
+* [Open Sans](http://www.fontsquirrel.com/fonts/open-sans) font
 
 
-## Contributors
-Patrick Lühne, [http://www.luehne.de/](http://www.luehne.de/)  
-Norman Rzepka, [scalable minds](http://scm.io/)
+## Credits
+The default template is based on a LaTeX class by Patrick Lühne, [http://www.luehne.de/](http://www.luehne.de/).
 
 ## License
-MIT &copy; scalable minds & Patrick Lühne 2014
+MIT &copy; scalable minds 2014

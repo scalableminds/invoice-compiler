@@ -1,15 +1,14 @@
 #!/usr/bin/env coffee
 
-_    = require("lodash")
-fs   = require("fs")
-path = require("path")
-exec = require("child_process").exec
-yaml = require("js-yaml")
-moment = require("moment")
-mkdirp = require("mkdirp")
+_           = require("lodash")
+fs          = require("fs")
+path        = require("path")
+exec        = require("child_process").exec
+yaml        = require("js-yaml")
+moment      = require("moment")
+numeral     = require("numeral")
 wkhtmltopdf = require("wkhtmltopdf")
-numeral = require("numeral")
-handlebars = require("handlebars")
+handlebars  = require("handlebars")
 
 translation = {}
 
@@ -109,11 +108,16 @@ inFilename = process.argv[2]
 outFilename = replaceExtname(inFilename, ".pdf")
 
 # console.log(tmpFilename)
-
 data = yaml.safeLoad(fs.readFileSync(inFilename, "utf8"))
 data = transformData(data)
 
-tmpFilename = "#{__dirname}/templates/#{data.invoice.template}/#{"xxxx-xxxx-xxxx".replace(/x/g, -> ((Math.random() * 16) | 0).toString(16))}.html"
+templateFolder = "#{__dirname}/templates/#{data.invoice.template}"
+if fs.existsSync(path.join(path.dirname(inFilename), "templates", data.invoice.template))
+  console.log("Using custom template `#{data.invoice.template}`")
+  templateFolder = path.join(path.dirname(inFilename), "templates", data.invoice.template)
+
+
+tmpFilename = "#{templateFolder}/#{"xxxx-xxxx-xxxx".replace(/x/g, -> ((Math.random() * 16) | 0).toString(16))}.html"
 
 
 # Prepare rendering
@@ -147,13 +151,13 @@ handlebars.registerHelper("t", (phrase) ->
 )
 
 # Rendering
-template = handlebars.compile(fs.readFileSync("#{__dirname}/templates/#{data.invoice.template}/main.html", "utf8"))
+template = handlebars.compile(fs.readFileSync("#{templateFolder}/main.html", "utf8"))
 fs.writeFileSync(tmpFilename, template(data), "utf8")
 
 wkhtmltopdf("file://#{tmpFilename}", { 
   output: outFilename,
-  headerHtml: "#{__dirname}/templates/#{data.invoice.template}/header.html",
-  footerHtml: "#{__dirname}/templates/#{data.invoice.template}/footer.html",
+  headerHtml: "#{templateFolder}/header.html",
+  footerHtml: "#{templateFolder}/footer.html",
   marginLeft: "0mm",
   marginRight: "0mm",
 }, ->

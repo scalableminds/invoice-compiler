@@ -154,13 +154,17 @@ handlebars.registerHelper("t", (phrase) ->
 template = handlebars.compile(fs.readFileSync("#{templateFolder}/main.html", "utf8"))
 fs.writeFileSync(tmpFilename, template(data), "utf8")
 
-wkhtmltopdf("file://#{tmpFilename}", { 
+wkhtmltopdf("file://#{path.resolve(tmpFilename)}", { 
   output: outFilename,
   headerHtml: "#{templateFolder}/header.html",
   footerHtml: "#{templateFolder}/footer.html",
   marginLeft: "0mm",
   marginRight: "0mm",
-}, ->
-  console.log("Created #{outFilename}")
+}, (err) ->
+  if err
+    console.error("Error creating #{outFilename}")
+    console.error(err)
+  else
+    console.log("Created #{outFilename}")
   fs.unlinkSync(tmpFilename)
 )

@@ -4,7 +4,7 @@ invoice:
   template: "default"
   # Date is coded here, so you can rerender the invoice 
   # at a later point in time
-  date: 2014-07-06
+  date: 2019-02-03
   location: Pearadise
   # We use moment.js and numeral.js for localisation
   language: en
@@ -13,7 +13,7 @@ invoice:
 # Your details
 sender:
   name_short: Fresh Company
-  name: Fresh Company ltd.
+  name: Fresh Company Ltd.
   street: Veggieroad 32
   zip: 98765
   town: Pearadise
@@ -21,6 +21,13 @@ sender:
     name: Bob Orange
     email: bob@example.org
     phone: +49 123 4567 890
+  banking:
+    name: Fruit Bank
+    iban: PE12 3456 7890 1234 5678 90
+    bic: PEARADISE12
+  footer: |
+    Managing Director: Bob Orange
+    District Court Pearadise 123456
 
 
 # The other guy's details

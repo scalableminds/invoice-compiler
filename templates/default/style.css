@@ -1,15 +1,19 @@
 * {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-html, body {
+html,
+body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  font: 9.5pt "Open Sans";
+  font-size: 8.5pt;
   line-height: 1.5;
 }
 body {
+  position: relative;
   padding: 5mm 25mm;
 }
 .clearfix {
@@ -26,12 +30,14 @@ p {
   margin-top: 0;
   margin-bottom: 12pt;
 }
-strong, h1, h2, h3, h4, th {
-  font-family: "Open Sans Semibold";
+strong,
+h1,
+h2,
+h3,
+h4,
+th {
   font-weight: 600;
 }
-
-
 
 #address-window {
   position: relative;
@@ -80,11 +86,9 @@ strong, h1, h2, h3, h4, th {
   margin-top: 10mm;
 }
 
-
-
 #info-box {
   float: right;
-  width: 45mm;
+  width: 55mm;
   margin-top: -12pt;
   color: #666;
   text-align: right;
@@ -97,21 +101,16 @@ strong, h1, h2, h3, h4, th {
 #info-box .head {
   margin-top: 12pt;
   margin-bottom: 4pt;
-  font-family: "Open Sans Semibold";
   font-weight: 600;
 }
-
-
 
 article {
   padding-top: 7mm;
 }
 article h1 {
-  font-size: 11pt;
+  font-size: 10pt;
   margin-bottom: 5mm;
 }
-
-
 
 table {
   width: 100%;
@@ -126,7 +125,8 @@ thead th {
 tbody td {
   border-bottom: 1pt solid #bbb;
 }
-td, th {
+td,
+th {
   padding: 1mm 0;
   vertical-align: top;
 }
@@ -135,7 +135,7 @@ tbody .foot td {
   border-bottom: none;
 }
 
-td:nth-child(1), 
+td:nth-child(1),
 th:nth-child(1) {
   min-width: 10mm;
 }
@@ -156,24 +156,29 @@ tbody .foot td:nth-child(2) {
   text-align: right;
 }
 
-
-
 /* Header */
 header {
   padding: 6mm 25mm 10mm;
   text-align: right;
+  width: 100%;
+  transform: scale(0.74);
+  transform-origin: top right;
 }
 header img {
   height: 25mm;
 }
 
-
-
 /* Footer */
 footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   padding: 10mm 25mm;
+  transform: scale(0.74);
+  transform-origin: left bottom;
 }
 footer p {
-  font-size: 7pt;
+  font-size: 6pt;
   margin-bottom: 6pt;
 }

@@ -1,30 +1,30 @@
 {
   "name": "invoice-compiler",
-  "version": "0.2.2",
-  "description": "Generate invoices from YAML files using wkhtmltopdf.",
-  "main": "index.coffee",
-  "author": "Norman Rzepka <norman.rzepka@scm.io>",
+  "version": "0.3.0",
+  "description": "Generate invoices from YAML files using puppeteer.",
+  "main": "index.js",
+  "author": "Norman Rzepka <code@normanrz.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/scalableminds/invoice-compiler.git"
   },
-  "homepage": "http://scm.io/",
-  "bugs": "https://github.com/scalableminds/invoice-compiler/issues",
-  "engines": {
-    "node": ">=0.10.0"
+  "scripts": {
+    "pretty": "node_modules/.bin/prettier --write index.js locales/*.json templates/default/*.{html,css}"
   },
   "dependencies": {
-    "coffee-script": "^1.8.0",
-    "handlebars": "^2.0.0",
-    "js-yaml": "^3.0.2",
-    "lodash": "^2.4.1",
-    "mkdirp": "^0.5.0",
-    "moment": "^2.7.0",
-    "numeral": "^1.5.3",
-    "wkhtmltopdf": "^0.1.5"
+    "handlebars": "^4.0.12",
+    "js-yaml": "^3.12.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "numeral": "^2.0.6",
+    "puppeteer": "^1.12.1",
+    "svg-to-dataurl": "^1.0.0"
   },
   "bin": {
-    "invoice": "./bin/invoice"
+    "invoice": "./index.js"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
   }
 }

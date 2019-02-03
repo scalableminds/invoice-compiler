@@ -1,17 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf8">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf8" />
     <style>
+      {{{ stylesheet }}}
       body {
         padding: 0;
       }
     </style>
   </head>
-  <body class="footer">
+  <body>
     <footer>
-      <p><strong>Fresh Company ltd.</strong></p>
+      <p><strong>{{ sender.name }}</strong></p>
+      <p>{{ pre sender.footer }}</p>
+      <p>
+        {{ sender.banking.name }} &bull; BIC {{ sender.banking.bic }} &bull;
+        IBAN {{ sender.banking.iban }}
+      </p>
     </footer>
   </body>
 </html>

@@ -65,7 +65,8 @@
       root.addEventListener("drop", async (ev) => {
         ev.preventDefault();
         const file = ev.dataTransfer.files[0];
-        root.innerHTML = `<p>Processing ${file.name}</p>`;
+        const fileName = file.name;
+        root.innerHTML = `<p>Processing ${fileName}</p>`;
         const data = await readFile(file);
         root.className = "processing";
         const res = await fetch("/compile", {
@@ -78,7 +79,7 @@
           const url = window.URL.createObjectURL(blob);
           const a = document.getElementById("download");
           a.href = url;
-          a.download = "invoice.pdf";
+          a.download = fileName.replace(".yaml", ".pdf");
           a.click();
           root.innerHTML = `<p>Processing complete.<br /><a href="${url}" target="_blank">Click here to download.</a></p>`;
         } else {

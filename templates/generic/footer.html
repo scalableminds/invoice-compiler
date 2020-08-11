@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf8">
+    <meta charset="utf8" />
     <style>
       {{{ stylesheet }}}
       body {
@@ -13,8 +13,10 @@
     <footer>
       <p><strong>{{ sender.name }}</strong></p>
       <p>{{ pre sender.footer }}</p>
-      <p>Tax-No. {{ sender.tax.number }} &bull; VAT-ID {{ sender.tax.vat_id }}</p>
-      <p>{{ sender.banking.name }} &bull; BIC {{ sender.banking.bic }} &bull; IBAN {{ sender.banking.iban }}</p>
+      <p>
+        {{ sender.banking.name }} &bull; BIC {{ sender.banking.bic }} &bull;
+        IBAN {{ sender.banking.iban }}
+      </p>
     </footer>
   </body>
 </html>

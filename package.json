@@ -13,6 +13,7 @@
     "pretty": "node_modules/.bin/prettier --write index.js locales/*.json templates/default/*.{html,css}"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "handlebars": "^4.0.12",
     "js-yaml": "^3.12.1",
     "lodash": "^4.17.11",

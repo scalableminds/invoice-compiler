@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const { compile } = require("./lib");
 
+const port = process.env.PORT || 3000;
+
 const app = express();
 app.use(express.raw({ type: "*/*" }));
 
@@ -23,5 +25,5 @@ app.post("/compile", async (req, res) => {
   }
 });
 
-app.listen(3000, "0.0.0.0");
-console.log("Listening to 3000");
+app.listen(port, "0.0.0.0");
+console.log(`Listening to ${port}`);

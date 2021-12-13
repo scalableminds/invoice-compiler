@@ -10,7 +10,7 @@ RUN  apt-get update \
      # Alternatively, we could could include the entire dep list ourselves
      # (https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix)
      # but that seems too easy to get out of date.
-     && apt-get install -y google-chrome-stable ttf-freefont fonts-ipafont-gothic \
+     && apt-get install -y libxss1 google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
      && rm -rf /var/lib/apt/lists/* \
      && wget --quiet https://github.com/JulietaUla/Montserrat/archive/v7.210.zip -O Montserrat.zip \
      && unzip -j Montserrat.zip "Montserrat-7.210/fonts/otf/*" -d /usr/share/fonts/montserrat \

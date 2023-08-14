@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
-  font-family: "Montserrat", "Liberation Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Nunito", "Liberation Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 html, body {
   min-height: 100%;

@@ -21,6 +21,7 @@ app.post("/compile", async (req, res) => {
     await compile(inFilename, outFilename);
     res.download(outFilename);
   } catch (err) {
+    console.error(err);
     res.status(500).send(`${err}\n${err.stack}`);
   }
 });

@@ -195,6 +195,8 @@ exports.compile = async function compile(inFilename, outFilename) {
   );
 
   const browser = await puppeteer.launch({
+    headless: "new",
+    executablePath: "google-chrome-stable",
     args: [
       // Required for Docker version of Puppeteer
       "--no-sandbox",

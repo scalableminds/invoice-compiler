@@ -1,9 +1,22 @@
 * {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
-  font-family: "Nunito", "Liberation Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family:
+    "Nunito",
+    "Liberation Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
-html, body {
+html,
+body {
   min-height: 100%;
   margin: 0;
   padding: 0;
@@ -28,11 +41,14 @@ p {
   margin-top: 0;
   margin-bottom: 12pt;
 }
-strong, h1, h2, h3, h4, th {
+strong,
+h1,
+h2,
+h3,
+h4,
+th {
   font-weight: 600;
 }
-
-
 
 #address-window {
   position: relative;
@@ -81,8 +97,6 @@ strong, h1, h2, h3, h4, th {
   margin-top: 10mm;
 }
 
-
-
 #info-box {
   float: right;
   width: 55mm;
@@ -101,8 +115,6 @@ strong, h1, h2, h3, h4, th {
   font-weight: 600;
 }
 
-
-
 article {
   padding-top: 7mm;
 }
@@ -110,8 +122,6 @@ article h1 {
   font-size: 10pt;
   margin-bottom: 5mm;
 }
-
-
 
 table {
   width: 100%;
@@ -126,7 +136,8 @@ thead th {
 tbody td {
   border-bottom: 1pt solid #bbb;
 }
-td, th {
+td,
+th {
   padding: 1mm 0;
   vertical-align: top;
 }
@@ -135,7 +146,7 @@ tbody .foot td {
   border-bottom: none;
 }
 
-td:nth-child(1), 
+td:nth-child(1),
 th:nth-child(1) {
   min-width: 10mm;
 }
@@ -156,8 +167,6 @@ tbody .foot td:nth-child(2) {
   text-align: right;
 }
 
-
-
 /* Header */
 header {
   padding: 6mm 25mm 10mm;
@@ -170,8 +179,6 @@ header img {
   height: 25mm;
 }
 
-
-
 /* Footer */
 footer {
   position: absolute;
@@ -179,7 +186,7 @@ footer {
   left: 0;
   width: 100%;
   padding: 10mm 25mm;
-  transform: scale(0.74); 
+  transform: scale(0.74);
   transform-origin: left bottom;
 }
 footer p {

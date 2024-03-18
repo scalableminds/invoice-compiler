@@ -6,7 +6,7 @@ const { compile } = require("./lib");
 const replaceExtname = (filename, newExtname) =>
   filename.replace(
     new RegExp(path.extname(filename).replace(/\./g, "\\."), "g"),
-    newExtname
+    newExtname,
   );
 
 (async () => {

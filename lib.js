@@ -6,7 +6,6 @@ const moment = require("moment");
 const numeral = require("numeral");
 const puppeteer = require("puppeteer");
 const handlebars = require("handlebars");
-const svgToDataURL = require("svg-to-dataurl");
 
 let translation = {};
 
@@ -37,6 +36,18 @@ const sum = (items) => items.reduce((r, a) => r + a, 0);
 const calculateNet = (items) => sum(items.map((a) => a.net_value));
 
 const calculateTotal = (items) => sum(items.map((a) => a.total_value));
+
+const svgToDataURL = svgStr => {
+  const encoded = encodeURIComponent(svgStr)
+    .replace(/'/g, '%27')
+    .replace(/"/g, '%22')
+
+  const header = 'data:image/svg+xml,'
+  const dataUrl = header + encoded
+
+  return dataUrl
+}
+
 
 // Default language setting
 setLanguage("de");
@@ -125,7 +136,7 @@ const transformData = function(data) {
 };
 
 exports.compile = async function compile(inFilename, outFilename) {
-  let data = yaml.safeLoad(fs.readFileSync(inFilename, "utf8"));
+  let data = yaml.load(fs.readFileSync(inFilename, "utf8"));
   data = transformData(data);
 
   let templateFolder = `${__dirname}/templates/${data.invoice.template}`;
@@ -150,7 +161,7 @@ exports.compile = async function compile(inFilename, outFilename) {
   // Prepare rendering
   handlebars.registerHelper("plusOne", (value) => value + 1);
   handlebars.registerHelper("number", (value) =>
-    numeral(value).format("0[.]0")
+    numeral(value).format("0[.]0[0]")
   );
   handlebars.registerHelper(
     "money",
@@ -195,8 +206,6 @@ exports.compile = async function compile(inFilename, outFilename) {
   );
 
   const browser = await puppeteer.launch({
-    headless: "new",
-    executablePath: "google-chrome-stable",
     args: [
       // Required for Docker version of Puppeteer
       "--no-sandbox",
